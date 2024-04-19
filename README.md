@@ -1,5 +1,5 @@
 # WazeCredit Project
-* [Dependency Injection Overview (.NET 5)](#dependency-injection-overview)
+* [Dependency Injection Overview (.NET 5)](#dependency-injection-overview-.net-5)
 * [WazeCredit DI Specifications](#wazeCredit-dI-specifications)
 
 ## Dependency Injection Overview (.NET 5)
