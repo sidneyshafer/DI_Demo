@@ -1,8 +1,8 @@
 # WazeCredit Project
-* [Dependency Injection Overview (.NET 5)](#dependency-injection-overview-.net-5)
+* [Dependency Injection Overview .NET 5](#dependency-injection-overview-.net-5)
 * [WazeCredit DI Specifications](#wazeCredit-dI-specifications)
 
-## Dependency Injection Overview (.NET 5)
+## Dependency Injection Overview .NET 5
 
 ASP.NET Core is designed from scratch to support Dependency Injection.
 NET Core injects objects of dependency classes through constructor or method by using built-in inversion of control (IoC) container.
