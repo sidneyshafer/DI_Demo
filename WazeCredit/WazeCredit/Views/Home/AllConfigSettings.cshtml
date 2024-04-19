@@ -1,0 +1,15 @@
+﻿@model List<string>
+
+@{
+    ViewData["Title"] = "Config Settings";
+}
+
+<div class="p-4">
+    <h3>The following are configurations from AppSettings:</h3>
+    <ul>
+        @foreach(var message in Model)
+        {
+            <li>@message</li>
+        }
+    </ul>
+</div>
