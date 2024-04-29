@@ -73,7 +73,7 @@ Dependency injection is the fifth principle of S.O.L.I.D
 | ICreditApproved |	Scoped |	Credit approved based on model salary |
 
 * Register application services in container in the Startup file.
-```
+```csharp
 services.AddTransient<IMarketForecaster, MarketForecaster>();
 ```
 
@@ -87,7 +87,7 @@ services.AddTransient<IMarketForecaster, MarketForecaster>();
   *	HttpContext is the context for request/response.
 *	Register custom middleware in Startup file. 
   *	Middleware is registered the first time an application runs.
-  ```
+  ```csharp
   app.UseMiddleware<CustomMiddleware>();
   ```
 *	Register services in container.
@@ -101,15 +101,15 @@ services.AddTransient<IMarketForecaster, MarketForecaster>();
 
 **Different Ways to Register a Service**
 *	Add abstraction and implementation.
-  ```
+  ```csharp
   services.AddTransient<IMarketForecaster, MarketForecaster>();
   ```
 *	Concrete interface with implementation that uses the “new” keyword. Only works for singleton.
-  ```
+  ```csharp
   services.AddSingleton<IMarketForecaster>(new MarketForecaster());
   ```
 *	If you do not have an abstraction, provide a concrete implementation (singleton uses “new” keyword).
-  ```
+  ```csharp
   services.AddTransient<MarketForecaster>();
   services.AddSingleton<new MarketForecaster>();
   ```
@@ -117,27 +117,27 @@ services.AddTransient<IMarketForecaster, MarketForecaster>();
 **TryAdd[LIFETIME]<>**
 *	Checks to see if an implementation for that service already exists.
 *	If the implementation already exists, it will not register the new implementation.
-  ```
+  ```csharp
   services.TryAddTransient<IMarketForecaster, MarketForecaster>();
   ```
 
 **Replace<>**
 *	Replaces the previous implementation with new implementation.
 *	Requires a service descriptor.
-  ```
+  ```csharp
   services.Replace(ServiceDescriptor.Transient<IMarketForecaster, MarketForecaster>());
   ```
 
 **RemoveAll<>**
 *	Removes all implementation services.
 *	Requires the service type you want to remove.
-  ```
+  ```csharp
   services.RemoveAll<IMarketForecaster>();
   ```
 
 **Register Multiple Implementations**
 *	Register multiple service implementations of the IValidationChecker interface.
-  ```
+  ```csharp
   services.TryAddEnumerable(new[]
   {
       ServiceDescriptor.Scoped<IValidationChecker, AddressValidationChecker>(),
@@ -145,18 +145,18 @@ services.AddTransient<IMarketForecaster, MarketForecaster>();
   });
   ```
 *	Register the ICreditValidator service. The IValidationChecker is injected into the CreditValidator class as an IEnumerable to get all validations.
-  ```
+  ```csharp
   services.AddScoped<ICreditValidator, CreditValidator>();
   ```
 
 **Conditional Implementation**
 *	Register classes to be implemented for ICreditApproved service.
-  ```
+  ```csharp
   services.AddScoped<CreditApprovedHigh>();
   services.AddScoped<CreditApprovedLow>();
   ```
 *	Use conditional statements to select which implementation to use for user interface based on credit approved criteria from custom Enum class.
-  ```
+  ```csharp
   services.AddScoped<Func<CreditApprovedEnum, ICreditApproved>>(ServiceProvider => range =>
   {
       switch (range)
@@ -175,10 +175,10 @@ services.AddTransient<IMarketForecaster, MarketForecaster>();
 **ILogger – Logging to Files**
 *	Install NuGet Package: Serilog.Extensions.Logging.File
 *	Inject the ILoggerFactory service into the Configure method of the Startup file.
-  ```
+  ```csharp
   public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
   ```
 *	Configure middleware for logging to file in Startup.
-  ```
+  ```csharp
   loggerFactory.AddFile(“logs/creditApp-log-{Date}.txt”);
   ```
